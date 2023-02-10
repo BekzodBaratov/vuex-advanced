@@ -20,24 +20,15 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { computed } from "vue";
 import { useStore } from "vuex";
 import { currency } from "../../currency";
-export default {
-  setup() {
-    const store = useStore();
-    const checkoutStatus = computed(() => store.state.cart.checkoutStatus);
-    const products = computed(() => store.getters["cart/cartProducts"]);
-    const total = computed(() => store.getters["cart/cartTotalPrice"]);
-    const checkout = (products) => store.dispatch("cart/checkout", products);
-    return {
-      currency,
-      checkoutStatus,
-      products,
-      total,
-      checkout,
-    };
-  },
-};
+const store = useStore();
+
+const checkoutStatus = computed(() => store.state.cart.checkoutStatus);
+const products = computed(() => store.getters["cart/cartProducts"]);
+const total = computed(() => store.getters["cart/cartTotalPrice"]);
+
+const checkout = (products) => store.dispatch("cart/checkout", products);
 </script>
